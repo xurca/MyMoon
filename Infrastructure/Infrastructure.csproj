@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>MyMoon.Infrastructure</RootNamespace>
+    <AssemblyName>MyMoon.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Persistence\20200802164034_initialCreate.cs" />
+    <Compile Remove="Persistence\20200802164034_initialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200802164536_initialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200802164536_initialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200802180242_initialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200802180242_initialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200802201854_InitialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200802201854_InitialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200802202033_InitialCrete.cs" />
+    <Compile Remove="Persistence\Migrations\20200802202033_InitialCrete.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Identity\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="4.1.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
+
+</Project>
