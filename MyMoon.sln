@@ -16,9 +16,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{0794C7DA-3D4D-409C-B697-4BE07AFCFC8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{C9357A81-2E4F-4056-BFAE-0D3E8C56D584}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{C9357A81-2E4F-4056-BFAE-0D3E8C56D584}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{A338725A-E53A-4698-B5E2-1268E985C02D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clientapp", "clientapp", "{3CBCDC5E-6CC7-443C-8E1D-4A8EE0ABCD1A}"
+	ProjectSection(SolutionItems) = preProject
+		ClientApp\.gitignore = ClientApp\.gitignore
+		ClientApp\README.md = ClientApp\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B140A9BC-5C87-4653-B77F-3DDC8E80AACA}"
+	ProjectSection(SolutionItems) = preProject
+		ClientApp\src\App.js = ClientApp\src\App.js
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +63,8 @@ Global
 		{0794C7DA-3D4D-409C-B697-4BE07AFCFC8E} = {A338725A-E53A-4698-B5E2-1268E985C02D}
 		{C9357A81-2E4F-4056-BFAE-0D3E8C56D584} = {A338725A-E53A-4698-B5E2-1268E985C02D}
 		{A338725A-E53A-4698-B5E2-1268E985C02D} = {6552D310-2636-4707-A4DF-4A3925A4F52D}
+		{3CBCDC5E-6CC7-443C-8E1D-4A8EE0ABCD1A} = {6552D310-2636-4707-A4DF-4A3925A4F52D}
+		{B140A9BC-5C87-4653-B77F-3DDC8E80AACA} = {3CBCDC5E-6CC7-443C-8E1D-4A8EE0ABCD1A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C9804BE7-DC0D-4529-B0B4-74EB18DCE81D}
