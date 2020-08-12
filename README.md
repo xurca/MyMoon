@@ -22,5 +22,7 @@
 5. https://github.com/jasontaylordev/NorthwindTraders
 
 ## VSCode
+- install [C# Extension for VS code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 - `dotnet tool install --global dotnet-ef` from TERMINAL
 - `dotnet ef Update-Database --project Api` from TERMINAL to run migrations and create database
+- https://localhost:5001/swagger/index.html
