@@ -7,7 +7,7 @@ export const CityToField = ({ value, name, onChange }) => (
     value={value}
     onChange={onChange}
     name={name}
-    label='Where To'
+    label='სად'
     startIcon={<FlightLand color='primary'/>}
   />
 );

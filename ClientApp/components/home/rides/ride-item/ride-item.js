@@ -21,6 +21,4 @@ const RideItem = ({ onClick }) => {
   )
 }
 
-RideItem.propTypes = {}
-
 export default RideItem

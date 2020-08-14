@@ -3,7 +3,7 @@ import { TimePicker } from '@material-ui/pickers'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { CalendarToday, Schedule } from '@material-ui/icons';
 
-const TimeField = ({ value, name, onChange, ...rest }) => (
+const TimeField = ({ value, name, label, onChange, ...rest }) => (
   <TimePicker
     error={false}
     size='small'
@@ -16,7 +16,7 @@ const TimeField = ({ value, name, onChange, ...rest }) => (
     }}
     inputVariant='outlined'
     ampm={false}
-    label="Time"
+    label={label}
     fullWidth
     InputProps={{
       startAdornment: (

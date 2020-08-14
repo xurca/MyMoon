@@ -6,7 +6,7 @@ import CenteredBox from '../../../shared/centered-box';
 const DetailsArea = () => (
   <>
     <CenteredBox flex={1} style={{ borderBottom: '1px solid #f1f1f1' }}>
-      <Typography variant='h6'>
+      <Typography variant='subtitle2'>
         ANZ-224
       </Typography>
     </CenteredBox>

@@ -10,8 +10,8 @@ const AvatarArea = () => (
     style={{ height: '100%' }}
   >
     <S.DriverAvatar alt="Remy Sharp" src={''}/>
-    <Typography variant='h6'>
-      Brian K.
+    <Typography variant='body1'>
+      ჯონდი ბაღათურია
     </Typography>
     <Rating value={3} size='small' readOnly/>
   </CenteredBox>

@@ -8,10 +8,10 @@ const RidesToolbar = () => {
   return (
     <CenteredBox justifyContent='space-between'>
       <FlexBox alignItems='flex-end'>
-        <Typography variant='h5' style={{ marginRight: 8 }}>
-          Upcoming Rides
+        <Typography variant='h6' style={{ marginRight: 8, paddingLeft: 6 }}>
+          მიმდინარე მარშრუტები
         </Typography>
-        <sub>150+ results</sub>
+        <sub>150+ შედეგი</sub>
       </FlexBox>
       <CreateRideAlert/>
     </CenteredBox>

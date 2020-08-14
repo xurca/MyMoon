@@ -3,9 +3,9 @@ import { DatePicker } from '@material-ui/pickers';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { CalendarToday } from '@material-ui/icons';
 
-const DateField = ({ value, name, onChange, ...rest }) => (
+const DateField = ({ value, name, label, onChange, ...rest }) => (
   <DatePicker
-    label={'date'}
+    label={label}
     error={false}
     size='small'
     helperText={null}

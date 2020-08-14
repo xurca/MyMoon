@@ -7,7 +7,7 @@ export const CityFromField = ({ value, name, onChange }) => (
     value={value}
     onChange={onChange}
     name={name}
-    label='Where from'
+    label='საიდან'
     startIcon={<FlightTakeoff color='primary'/>}
   />
 );

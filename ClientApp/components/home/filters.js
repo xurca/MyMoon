@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
 import Slider from '@material-ui/core/Slider';
-import IconButton from '@material-ui/core/IconButton';
 import Work from '@material-ui/icons/Work';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 
-const Filters = props => {
+const Filters = () => {
+  const [values, setValues] = useState({
+    radius: '',
+    luggageSize: '',
+    preferences: [],
+    comfort: []
+  });
 
   const valuetext = (value) => {
     return `${value}`;
@@ -19,7 +25,7 @@ const Filters = props => {
     <S.Filters>
       <S.FilterItemWrapper>
         <S.FilterItemTitle variant='body1' gutterBottom>
-          Radius
+          რადიუსი
         </S.FilterItemTitle>
         <Slider
           defaultValue={30}
@@ -34,32 +40,28 @@ const Filters = props => {
       </S.FilterItemWrapper>
       <S.FilterItemWrapper>
         <S.FilterItemTitle variant='body1' gutterBottom>
-          Lagguage
+          ბარგი
         </S.FilterItemTitle>
-        <Box display='flex' justifyContent='space-between' px={1}>
-          <Box align='center'>
-            <Work style={{ fontSize: 16 }}/>
-            <Typography variant='caption'>
-              Small
-            </Typography>
-          </Box>
-          <Box align='center'>
-            <Work style={{ fontSize: 20 }}/>
-            <Typography variant='caption'>
-              Medium
-            </Typography>
-          </Box>
-          <Box align='center'>
-            <Work style={{ fontSize: 24 }}/>
-            <Typography variant='caption'>
-              Large
-            </Typography>
-          </Box>
-        </Box>
+        <ToggleButtonGroup
+          exclusive
+          value={values.luggageSize}
+          onChange={() => void 0}
+          aria-label="lagguage size"
+        >
+          <ToggleButton value="small" aria-label="small">
+            <Work color='primary' style={{ fontSize: 16 }}/>
+          </ToggleButton>
+          <ToggleButton value="medium" aria-label="medium">
+            <Work color='primary' style={{ fontSize: 20 }}/>
+          </ToggleButton>
+          <ToggleButton value="large" aria-label="large">
+            <Work color='primary' style={{ fontSize: 24 }}/>
+          </ToggleButton>
+        </ToggleButtonGroup>
       </S.FilterItemWrapper>
       <S.FilterItemWrapper>
         <S.FilterItemTitle variant='body1' gutterBottom>
-          Rides
+          კომფორტი
         </S.FilterItemTitle>
         <FormControlLabel
           control={
@@ -68,21 +70,7 @@ const Filters = props => {
               color="primary"
             />
           }
-          label="Hide partial routes"
-        />
-      </S.FilterItemWrapper>
-      <S.FilterItemWrapper>
-        <S.FilterItemTitle variant='body1' gutterBottom>
-          Rides
-        </S.FilterItemTitle>
-        <FormControlLabel
-          control={
-            <Checkbox
-              value="hide"
-              color="primary"
-            />
-          }
-          label="Hide partial routes"
+          label="მაქს. ორი უკანა სავარელზე"
         />
       </S.FilterItemWrapper>
       <S.FilterItemWrapper>
@@ -98,7 +86,7 @@ const Filters = props => {
                   color="primary"
                 />
               }
-              label="Music"
+              label="მუსიკა"
             />
             <FormControlLabel
               control={
@@ -107,7 +95,7 @@ const Filters = props => {
                   color="primary"
                 />
               }
-              label="Music"
+              label="ცხოველები"
             />
           </Box>
           <Box display='flex' flexDirection='column'>
@@ -118,7 +106,7 @@ const Filters = props => {
                   color="primary"
                 />
               }
-              label="Animals"
+              label="მოწევა"
             />
             <FormControlLabel
               control={
@@ -127,7 +115,7 @@ const Filters = props => {
                   color="primary"
                 />
               }
-              label="Smoking"
+              label="გაგრილება"
             />
           </Box>
         </Box>
@@ -139,13 +127,11 @@ const Filters = props => {
           color='primary'
           fullWidth
         >
-          Update
+          ფილტრაცია
         </Button>
       </S.FilterItemWrapper>
     </S.Filters>
   );
 };
-
-Filters.propTypes = {};
 
 export default Filters;

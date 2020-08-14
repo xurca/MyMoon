@@ -9,6 +9,7 @@ import NavigationPrimary from './navigation/navigation-primary';
 import NavigationSecondary from './navigation/navigation-secondary';
 import { NavigationButton } from './navigation/navigation-button';
 import { NavigationResponsive } from './navigation/navigation-responsive';
+import Flag from '../shared/flag';
 
 const TopBar = styled(Toolbar)(({ theme }) => ({
   borderBottom: '1px solid #f1f1f1',

@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import DateField from '../../shared/form-elements/date-field';
 import TimeField from '../../shared/form-elements/time-field';
 import { SubmitButton } from './submit-button';
+import FlexBox from '../../shared/flex-box';
 
 export const SearchFormViewResponsive = ({ setFieldValue, values }) => (
   <div>
@@ -22,28 +23,26 @@ export const SearchFormViewResponsive = ({ setFieldValue, values }) => (
         onChange={setFieldValue}
       />
     </Box>
-    <Box mt={2}>
+    <FlexBox mt={2}>
       <DateField
         name='date'
         value={values.date}
         onChange={setFieldValue}
         style={{ marginRight: 8 }}
       />
-    </Box>
-    <Box mt={2}>
       <TimeField
         name='time'
         value={values.date}
         onChange={setFieldValue}
         style={{ marginRight: 4 }}
       />
-    </Box>
-    <Box my={2}>
+    </FlexBox>
+    <FlexBox my={2} justifyContent='flex-end'>
       <SubmitButton
         type='submit'
         style={{ margin: 0 }}
       />
-    </Box>
+    </FlexBox>
   </div>
 );
 

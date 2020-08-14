@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 
 export const RideItem = styled(Paper)(({ theme }) => ({
-  height: 180,
+  height: 170,
   marginBottom: theme.spacing(2),
   marginTop: theme.spacing(1),
   display: 'flex',
@@ -12,8 +12,9 @@ export const RideItem = styled(Paper)(({ theme }) => ({
 }))
 
 export const DriverAvatar = styled(Avatar)(({ theme }) => ({
-  width: theme.spacing(10),
-  height: theme.spacing(10),
+  width: theme.spacing(8),
+  height: theme.spacing(8),
+  marginBottom: 6
 }))
 
 export const InfoItemsWrapper = styled(Box)(({ theme }) => ({

@@ -22,13 +22,10 @@ const SearchForm = () => {
       ...prevState,
       [name]: value
     }))
-
-    console.log(name, value)
   }
 
   const handleChange = event => {
     const { name, value } = event.target
-    console.log(name, value)
     setFieldValue(name, value)
   }
 

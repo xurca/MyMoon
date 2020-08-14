@@ -33,12 +33,14 @@ const SearchFormView = ({ setFieldValue, values }) => {
       </S.CitiesRangeWrapper>
       <Box width='50%' display='flex' alignItems='center'>
         <DateField
+          label='თარიღი'
           name='date'
           value={values.date}
           onChange={setFieldValue}
           style={{ marginRight: 8 }}
         />
         <TimeField
+          label='დრო'
           name='time'
           value={values.date}
           onChange={setFieldValue}

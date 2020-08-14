@@ -26,6 +26,13 @@ const theme = createMuiTheme({
       secondary: '#608496'
     }
   },
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '0.8rem',
+      }
+    }
+  }
 })
 
 export default theme;

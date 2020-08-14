@@ -5,11 +5,11 @@ import RideInfoItems from './ride-info-items';
 
 const DescArea = () => (
   <Box p={2} position='relative'>
-    <Typography variant='h6' gutterBottom>
-      Today at 12:30
+    <Typography variant='subtitle2' gutterBottom>
+      დღეს 12:30
     </Typography>
     <Typography variant='subtitle1'>
-      Kutaisi
+      ქუთაისი
     </Typography>
     <RideInfoItems/>
   </Box>
