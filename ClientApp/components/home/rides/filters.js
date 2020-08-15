@@ -22,7 +22,7 @@ const Filters = () => {
   };
 
   return (
-    <S.Filters>
+    <>
       <S.FilterItemWrapper>
         <S.FilterItemTitle variant='body1' gutterBottom>
           რადიუსი
@@ -119,18 +119,8 @@ const Filters = () => {
             />
           </Box>
         </Box>
-
       </S.FilterItemWrapper>
-      <S.FilterItemWrapper>
-        <Button
-          variant='contained'
-          color='primary'
-          fullWidth
-        >
-          ფილტრაცია
-        </Button>
-      </S.FilterItemWrapper>
-    </S.Filters>
+    </>
   );
 };
 
