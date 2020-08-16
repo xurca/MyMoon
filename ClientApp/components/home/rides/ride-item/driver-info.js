@@ -3,6 +3,7 @@ import styled from '@material-ui/core/styles/styled';
 import DriverAvatar from './driver-avatar';
 import DriverName from './driver-name';
 import DriverRating from './driver-rating';
+import Box from '@material-ui/core/Box';
 
 const Wrapper = styled('div')({
   display: 'flex',
@@ -14,7 +15,9 @@ const Wrapper = styled('div')({
 
 const DriverInfo = () => (
   <Wrapper>
-    <DriverAvatar/>
+    <Box mb={0.5}>
+      <DriverAvatar/>
+    </Box>
     <DriverName/>
     <DriverRating/>
   </Wrapper>

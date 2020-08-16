@@ -8,6 +8,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
+import { useMediaQuery } from '@material-ui/core';
+import useTheme from '@material-ui/core/styles/useTheme';
+import FlexBox from '../../shared/flex-box';
 
 const Filters = () => {
   const [values, setValues] = useState({
@@ -16,6 +19,8 @@ const Filters = () => {
     preferences: [],
     comfort: []
   });
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('md'))
 
   const valuetext = (value) => {
     return `${value}`;
@@ -77,8 +82,8 @@ const Filters = () => {
         <S.FilterItemTitle variant='body1' gutterBottom>
           Preferences
         </S.FilterItemTitle>
-        <Box display='flex' justifyContent='space-between'>
-          <Box display='flex' flexDirection='column'>
+        <FlexBox justifyContent='space-between' flexDirection={matches ? 'column' : 'row'}>
+          <FlexBox flexDirection='column'>
             <FormControlLabel
               control={
                 <Checkbox
@@ -97,8 +102,8 @@ const Filters = () => {
               }
               label="ცხოველები"
             />
-          </Box>
-          <Box display='flex' flexDirection='column'>
+          </FlexBox>
+          <FlexBox flexDirection='column'>
             <FormControlLabel
               control={
                 <Checkbox
@@ -117,8 +122,8 @@ const Filters = () => {
               }
               label="გაგრილება"
             />
-          </Box>
-        </Box>
+          </FlexBox>
+        </FlexBox>
       </S.FilterItemWrapper>
     </>
   );

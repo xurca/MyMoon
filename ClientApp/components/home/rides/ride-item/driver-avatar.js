@@ -24,7 +24,7 @@ export const StyledAvatar = styled(Avatar)(({ size, theme }) => {
 });
 
 const DriverAvatar = ({ size }) => (
-  <StyledAvatar alt="" src={''} size={size}/>
+  <StyledAvatar alt="" src='/assets/images/avatar.jpg' size={size}/>
 );
 
 export default DriverAvatar;

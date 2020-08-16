@@ -1,12 +1,14 @@
 import PageContainer from './page-container';
-import Index from './header';
+import Header from './header';
 import React from 'react';
+import Footer from './footer';
 
 export default function Layout({ children }) {
   return (
     <PageContainer>
-      <Index/>
+      <Header/>
       {children}
+      <Footer/>
     </PageContainer>
   );
 }

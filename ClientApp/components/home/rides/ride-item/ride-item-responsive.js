@@ -16,9 +16,10 @@ const RideItemResponsive = ({
   description,
   bookedSeats,
   plateNumber,
-  driver
+  driver,
+  onClick
 }) => (
-  <S.RideItemResponsive>
+  <S.RideItemResponsive onClick={onClick}>
     <FlexBox flexDirection='column' width='100%'>
       <FlexBox pl={1.5} justifyContent='space-between' alignItems='center'>
         <span>{rideDate} {rideTime}</span>

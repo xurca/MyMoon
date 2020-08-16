@@ -10,13 +10,13 @@ const RideSeats = ({ booked, free }) => {
 
   if (free && free > 0) {
     for (let i = 0; i < free; i++) {
-      seats.push(<Lens style={{ color: green[300] }} fontSize='small'/>);
+      seats.push(<Lens style={{ color: green['A400'] }} fontSize='small'/>);
     }
   }
 
   if (booked && booked > 0) {
     for (let i = 0; i < booked; i++) {
-      seats.push(<Lens style={{ color: red[500] }} fontSize='small'/>);
+      seats.push(<Lens style={{ color: red['A100'] }} fontSize='small'/>);
     }
   }
 
