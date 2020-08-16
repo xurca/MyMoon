@@ -11,10 +11,18 @@ export const RideItem = styled(Paper)(({ theme }) => ({
   cursor: 'pointer'
 }))
 
-export const DriverAvatar = styled(Avatar)(({ theme }) => ({
-  width: theme.spacing(8),
-  height: theme.spacing(8),
-  marginBottom: 6
+export const RideItemResponsive = styled(Paper)(({ theme }) => ({
+  marginBottom: theme.spacing(2),
+  marginTop: theme.spacing(1),
+  display: 'flex',
+  cursor: 'pointer',
+}))
+
+
+
+export const DriverAvatarResponsive = styled(Avatar)(({ theme }) => ({
+  width: theme.spacing(5),
+  height: theme.spacing(5),
 }))
 
 export const InfoItemsWrapper = styled(Box)(({ theme }) => ({
