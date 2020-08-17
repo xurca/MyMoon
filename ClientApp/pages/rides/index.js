@@ -13,10 +13,21 @@ import FlexBox from '../../components/shared/flex-box';
 import Typography from '@material-ui/core/Typography';
 import FiltersModal from '../../components/home/rides/filters-modal';
 import FiltersForm from '../../components/home/rides/filters-form';
+import RideItemResponsive from '../../components/home/rides/ride-item/ride-item-responsive';
+import Box from '@material-ui/core/Box';
+import { useRouter } from 'next/router';
 
 export default function Rides() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const router = useRouter()
+
+  const handleRideClick = (rideId) => {
+    router.push(
+      '/rides/[id]',
+      `/rides/${rideId}`
+    );
+  }
 
   return (
     <div>
@@ -31,15 +42,39 @@ export default function Rides() {
           <Grid item xs={12} md={9} style={matches ? { paddingTop: 0 } : {}}>
             <Hidden smDown>
               <RidesToolbar/>
+              <RideItem onClick={() => handleRideClick(1)}/>
+              <RideItem onClick={() => handleRideClick(2)}/>
+              <RideItem onClick={() => handleRideClick(3)}/>
             </Hidden>
-            <RideItem/>
-            <RideItem/>
-            <RideItem/>
+            <Hidden mdUp>
+              <RideItemResponsive
+                rideDate='Today'
+                rideTime='10:33'
+                settings='settings'
+                description='description'
+                bookedSeats='bookedSeats'
+                plateNumber='ANZ-224'
+                driver='გელა'
+                onClick={handleRideClick}
+              />
+              <RideItemResponsive/>
+              <RideItemResponsive/>
+            </Hidden>
           </Grid>
         </Grid>
       </ContentContainer>
       <Hidden mdUp>
-        <Paper variant='outlined' square style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}>
+        <Box height={66}/>
+        <Paper
+          variant='outlined'
+          square
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}
+        >
           <Toolbar>
             <FlexBox justifyContent='space-between' alignItems='center' width='100%'>
               <Typography variant='body2'>
