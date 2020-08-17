@@ -26,9 +26,8 @@ export const Wrapper = styled('div')(({ theme }) => ({
 const RideInfo = ({ infoItems }) => (
   <Wrapper>
     {infoItems.map(item =>
-      <Box mr={0.5}>
+      <Box mr={0.5} key={item}>
         <IconWithTooltip
-          key={item}
           icon={rideInfoItemsMap[item].icon}
           tooltipText={rideInfoItemsMap[item].text}
         />

@@ -61,8 +61,6 @@ const StyledNav = styled('nav')(({ theme }) => ({
 const NavigationPrimary = () => {
   const router = useRouter()
 
-  console.log(router.pathname)
-
   return (
     <StyledNav>
       <ul>

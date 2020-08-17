@@ -5,24 +5,18 @@ import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 
 const RideSeats = ({ booked, free }) => {
+  const bookedIconStyles = Array(booked).fill({ color: red['A100'] });
+  const freeIconStyles = Array(free).fill({ color: green['A400'] });
 
-  const seats = [];
-
-  if (free && free > 0) {
-    for (let i = 0; i < free; i++) {
-      seats.push(<Lens style={{ color: green['A400'] }} fontSize='small'/>);
-    }
-  }
-
-  if (booked && booked > 0) {
-    for (let i = 0; i < booked; i++) {
-      seats.push(<Lens style={{ color: red['A100'] }} fontSize='small'/>);
-    }
-  }
-
+  const seatsIconStyles = [...freeIconStyles, ...bookedIconStyles];
   return (
     <FlexBox>
-      {seats}
+      {seatsIconStyles.map((style, index) =>
+        <Lens
+          key={index}
+          style={style}
+          fontSize='small'
+        />)}
     </FlexBox>
   );
 };
