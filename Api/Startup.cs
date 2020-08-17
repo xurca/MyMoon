@@ -35,7 +35,11 @@ namespace Api
             services.AddControllers();
 
             //services.AddOpenApiDocument();
-            services.AddSwaggerDocument();
+            services.AddSwaggerDocument((opt) =>
+            {
+                opt.Version = "v1";
+                opt.Title = "My Moon";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

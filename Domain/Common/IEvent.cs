@@ -4,8 +4,7 @@ using System.Text;
 
 namespace MyMoon.Domain.Common
 {
-    public abstract class BaseEntity
+    public interface IEvent
     {
-        public int Id { get; set; }
     }
 }

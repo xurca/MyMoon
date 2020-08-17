@@ -13,5 +13,19 @@ namespace MyMoon.Domain.Entities
         public int? LagguageSize { get; set; }
         public int? PassengerId { get; set; }
         public Passenger Passenger { get; set; }
+
+        private Route()
+        {
+
+        }
+
+        public Route(string location, string destination, DateTime departureTime, int? lagguageSize, int? passengerId)
+        {
+            Location = location;
+            Destination = destination;
+            DepartureTime = departureTime;
+            LagguageSize = lagguageSize;
+            PassengerId = passengerId;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyMoon.Domain.Common
 {
-    public abstract class AuditableEntity : BaseEntity
+    public abstract class AuditableEntity : Entity
     {
         public string CreatedBy { get; set; }
 

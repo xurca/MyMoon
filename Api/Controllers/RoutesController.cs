@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyMoon.Api.Controllers;
 using MyMoon.Application.Routes.Queries;
 using System.Threading.Tasks;
 

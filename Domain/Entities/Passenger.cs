@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyMoon.Domain.Entities
 {
-    public class Passenger : BaseEntity
+    public class Passenger : Entity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
