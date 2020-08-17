@@ -2,6 +2,7 @@ import React from 'react';
 import { t } from '../../../lib/helpers';
 import Link from 'next/link';
 import styled from '@material-ui/core/styles/styled';
+import { useRouter } from 'next/router';
 
 const StyledNav = styled('nav')(({ theme }) => ({
   background: '#fff',
@@ -46,11 +47,11 @@ const StyledNav = styled('nav')(({ theme }) => ({
         background: theme.palette.primary.main,
         height: 2,
       },
-      '&:hover': {
+      '&:hover, &.active': {
         color: '#555',
         background: 'rgba(7, 112, 155, 0.04)'
       },
-      '&:hover:after': {
+      '&:hover:after, &.active:after': {
         width: '100%',
       }
     }
@@ -58,15 +59,19 @@ const StyledNav = styled('nav')(({ theme }) => ({
 }));
 
 const NavigationPrimary = () => {
+  const router = useRouter()
+
+  console.log(router.pathname)
+
   return (
     <StyledNav>
       <ul>
-        <li>
+        <li className={router.pathname === '/rides' ? 'active' : ''}>
           <Link href="/rides">
             <a>{t('Find a ride')}</a>
           </Link>
         </li>
-        <li>
+        <li className={router.pathname === '/contact' ? 'active' : ''}>
           <Link href="/contact">
             <a>{t('Contact us')}</a>
           </Link>
