@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyMoon.Application.Routes.Queries;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
@@ -7,9 +8,10 @@ namespace Api.Controllers
     public class RoutesController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<GetRoutesQueryResponse>> Get()
+        [ProducesResponseType(typeof(GetRoutesQueryResponse), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetRoutesQueryResponse>> Get([FromQuery] GetRoutesQueryRequest request)
         {
-            return await Mediator.Send(new GetRoutesQueryRequest());
+            return await Mediator.Send(request);
         }
     }
 }

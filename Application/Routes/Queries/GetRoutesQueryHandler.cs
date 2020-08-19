@@ -22,12 +22,23 @@ namespace MyMoon.Application.Routes.Queries
 
         public async Task<GetRoutesQueryResponse> Handle(GetRoutesQueryRequest request, CancellationToken cancellationToken)
         {
+            var result = await _context.Routes
+                .AsNoTracking()
+                .Include(x => x.Passenger)
+                .Filter(request.Location, x => x.Location)
+                .Filter(request.From, request.To, x => x.DepartureTime)
+                .Select(x => new GetRoutesQueryItem
+                {
+                    DepartureTime = x.DepartureTime,
+                    Destination = x.Destination,
+                    LagguageSize = x.LagguageSize,
+                    Location = x.Location,
+                    FullName = x.Passenger.FullName
+                }).ToListAsync();
+
             return new GetRoutesQueryResponse
             {
-                Items = await _context.Routes.Select(x => new GetRoutesQueryItem
-                {
-
-                }).ToListAsync()
+                Items = result
             };
         }
     }

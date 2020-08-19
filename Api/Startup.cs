@@ -19,16 +19,17 @@ namespace Api
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration _configuration;
+        private ILoggerFactory _loggerFactory;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
-            services.AddInfrastructure(Configuration);
+            services.AddInfrastructure(_configuration);
 
             services.AddHttpContextAccessor();
             services.AddHealthChecks();
@@ -43,8 +44,10 @@ namespace Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            _loggerFactory = loggerFactory;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

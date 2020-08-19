@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MyMoon.Application.Common.Interfaces;
 using MyMoon.Domain.Common;
 using MyMoon.Domain.Entities;
@@ -20,6 +21,11 @@ namespace MyMoon.Infrastructure.Persistence
             _eventDispatcher = eventDispatcher;
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyMoonDbContext).Assembly);
@@ -29,24 +35,19 @@ namespace MyMoon.Infrastructure.Persistence
 
         public override int SaveChanges()
         {
-            _preSaveChanges().GetAwaiter().GetResult();
+            DispatchDomainEvents().GetAwaiter().GetResult();
             var res = base.SaveChanges();
             return res;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            await _preSaveChanges();
+            await DispatchDomainEvents();
             var res = await base.SaveChangesAsync(cancellationToken);
             return res;
         }
 
-        private async Task _preSaveChanges()
-        {
-            await _dispatchDomainEvents();
-        }
-
-        private async Task _dispatchDomainEvents()
+        private async Task DispatchDomainEvents()
         {
             var domainEventEntities = ChangeTracker.Entries<IEntity>()
                 .Select(po => po.Entity)
