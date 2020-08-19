@@ -17,13 +17,17 @@
     <Compile Remove="Persistence\Migrations\20200802201854_InitialCreate.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200802202033_InitialCrete.cs" />
     <Compile Remove="Persistence\Migrations\20200802202033_InitialCrete.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200802202058_InitialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200802202058_InitialCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Identity\" />
+    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.7" />
     <PackageReference Include="microsoft.Extensions.Logging.Console" Version="3.1.7" />
     <PackageReference Include="Npgsql" Version="4.1.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />

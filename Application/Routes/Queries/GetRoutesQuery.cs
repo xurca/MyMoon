@@ -1,12 +1,15 @@
 ﻿using FluentValidation;
 using MediatR;
+using MyMoon.Application.Common.Interfaces;
+using MyMoon.Application.Common.Models;
+using MyMoon.Domain.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace MyMoon.Application.Routes.Queries
 {
-    public class GetRoutesQueryRequest : IRequest<GetRoutesQueryResponse>
+    public class GetRoutesQueryRequest : SortAndPage, IRequest<GetRoutesQueryResponse>
     {
         public string Location { get; set; }
         public string Destination { get; set; }
@@ -17,13 +20,14 @@ namespace MyMoon.Application.Routes.Queries
     public class GetRoutesQueryResponse
     {
         public IEnumerable<GetRoutesQueryItem> Items { get; set; }
+        public int Total { get; internal set; }
     }
 
     public class GetRoutesQueryItem
     {
         public DateTime DepartureTime { get; set; }
         public string Destination { get; set; }
-        public int? LagguageSize { get; set; }
+        public LagguageSize? LagguageSize { get; set; }
         public string Location { get; set; }
         public string FullName { get; set; }
     }

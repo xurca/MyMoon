@@ -1,7 +1,6 @@
 ﻿using MyMoon.Domain.Common;
+using MyMoon.Domain.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyMoon.Domain.Entities
 {
@@ -10,16 +9,16 @@ namespace MyMoon.Domain.Entities
         public string Location { get; set; }
         public string Destination { get; set; }
         public DateTime DepartureTime { get; set; }
-        public int? LagguageSize { get; set; }
+        public LagguageSize? LagguageSize { get; set; }
         public int? PassengerId { get; set; }
-        public Passenger Passenger { get; set; }
+        public Passenger Passenger { get; private set; }
 
         private Route()
         {
 
         }
 
-        public Route(string location, string destination, DateTime departureTime, int? lagguageSize, int? passengerId)
+        public Route(string location, string destination, DateTime departureTime, LagguageSize? lagguageSize, int? passengerId)
         {
             Location = location;
             Destination = destination;

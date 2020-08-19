@@ -1,7 +1,4 @@
 ﻿using MyMoon.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyMoon.Domain.Entities
 {
@@ -19,6 +16,20 @@ namespace MyMoon.Domain.Entities
             {
                 return $"{FirstName} {LastName}";
             }
+        }
+
+        private Passenger()
+        {
+
+        }
+
+        public Passenger(string firstName, string lastName, decimal rating, bool isRenter, string userId)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Rating = rating;
+            IsRenter = isRenter;
+            UserId = userId;
         }
     }
 }

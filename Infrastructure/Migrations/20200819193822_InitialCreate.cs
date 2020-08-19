@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace MyMoon.Infrastructure.Persistence.Migrations
+namespace MyMoon.Infrastructure.Migrations
 {
     public partial class InitialCreate : Migration
     {

@@ -16,8 +16,15 @@ namespace MyMoon.Infrastructure
             services
                 .AddDbContext<MyMoonDbContext>(opt =>
                 {
-                    opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
-                    opt.UseLoggerFactory(loggerFactory);
+                    opt.UseNpgsql(configuration.GetConnectionString("DefaultConnection"), options =>
+                    {
+                        options.MigrationsAssembly(typeof(MyMoonDbContext).Assembly.FullName);
+                    });
+
+                    var enableDbLog = bool.Parse(configuration.GetSection("ApplicationSettings").GetSection("LogDb").Value);
+                    
+                    if (enableDbLog)
+                        opt.UseLoggerFactory(loggerFactory);
                 });
 
             services.AddScoped<IDbContext>(provider => provider.GetService<MyMoonDbContext>());

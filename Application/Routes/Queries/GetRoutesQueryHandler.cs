@@ -22,11 +22,16 @@ namespace MyMoon.Application.Routes.Queries
 
         public async Task<GetRoutesQueryResponse> Handle(GetRoutesQueryRequest request, CancellationToken cancellationToken)
         {
+            var totalCount = await _context.Routes.CountAsync();
+
             var result = await _context.Routes
                 .AsNoTracking()
                 .Include(x => x.Passenger)
                 .Filter(request.Location, x => x.Location)
+                .Filter(request.Destination, x => x.Destination)
                 .Filter(request.From, request.To, x => x.DepartureTime)
+                .Skip((request.Page - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .Select(x => new GetRoutesQueryItem
                 {
                     DepartureTime = x.DepartureTime,
@@ -38,7 +43,8 @@ namespace MyMoon.Application.Routes.Queries
 
             return new GetRoutesQueryResponse
             {
-                Items = result
+                Items = result,
+                Total = totalCount
             };
         }
     }
