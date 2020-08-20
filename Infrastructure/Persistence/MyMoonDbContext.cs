@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using MyMoon.Application.Common.Interfaces;
 using MyMoon.Domain.Common;
 using MyMoon.Domain.Entities;
+using MyMoon.Infrastructure.EventDispatching;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MyMoon.Domain.Common;
 using System.Threading.Tasks;
 
-namespace MyMoon.Domain.Common
+namespace MyMoon.Infrastructure.EventDispatching
 {
     public interface IEventDispatcher
     {

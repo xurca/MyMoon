@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyMoon.Domain.Common
+namespace MyMoon.Infrastructure.EventDispatching
 {
     public class EventDispatcher : IEventDispatcher
     {
