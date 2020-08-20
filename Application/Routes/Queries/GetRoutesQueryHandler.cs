@@ -26,7 +26,9 @@ namespace MyMoon.Application.Routes.Queries
 
             var result = await _context.Routes
                 .AsNoTracking()
-                .Include(x => x.Passenger)
+                .Include(x => x.User)
+                .Include(x => x.Preferences)
+                .ThenInclude(x => x.Preference)
                 .Filter(request.Location, x => x.Location)
                 .Filter(request.Destination, x => x.Destination)
                 .Filter(request.From, request.To, x => x.DepartureTime)
@@ -34,11 +36,18 @@ namespace MyMoon.Application.Routes.Queries
                 .Take(request.PageSize)
                 .Select(x => new GetRoutesQueryItem
                 {
+                    ArrivalTime = x.ArrivalTime,
                     DepartureTime = x.DepartureTime,
                     Destination = x.Destination,
                     LagguageSize = x.LagguageSize,
                     Location = x.Location,
-                    FullName = x.Passenger.FullName
+                    FullName = x.User.FullName,
+                    PricePerSeat = x.PricePerSeat,
+                    TotalSeats = x.TotalSeats,
+                    Rating = x.User.Rating,
+                    Age = x.User.Age,
+                    Gender = x.User.Gender,
+                    Preferences = x.Preferences.Select(p => p.Preference.Name)
                 }).ToListAsync();
 
             return new GetRoutesQueryResponse

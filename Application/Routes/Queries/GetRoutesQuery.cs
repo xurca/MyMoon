@@ -20,7 +20,7 @@ namespace MyMoon.Application.Routes.Queries
     public class GetRoutesQueryResponse
     {
         public IEnumerable<GetRoutesQueryItem> Items { get; set; }
-        public int Total { get; internal set; }
+        public int Total { get; set; }
     }
 
     public class GetRoutesQueryItem
@@ -30,6 +30,13 @@ namespace MyMoon.Application.Routes.Queries
         public LagguageSize? LagguageSize { get; set; }
         public string Location { get; set; }
         public string FullName { get; set; }
+        public DateTime ArrivalTime { get; set; }
+        public decimal PricePerSeat { get; set; }
+        public decimal TotalSeats { get; set; }
+        public decimal Rating { get; set; }
+        public int Age { get; set; }
+        public Gender Gender { get; set; }
+        public IEnumerable<string> Preferences { get; set; }
     }
 
     public class GetRoutesQueryRequestValidator : AbstractValidator<GetRoutesQueryRequest>

@@ -8,6 +8,8 @@ using MyMoon.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +25,8 @@ namespace MyMoon.Infrastructure.Persistence
                 {
                     try
                     {
+                        context.Database.EnsureDeleted();
+
                         if (context.Database.IsNpgsql())
                             context.Database.Migrate();
 
@@ -41,12 +45,18 @@ namespace MyMoon.Infrastructure.Persistence
 
         private async static Task SeedData(MyMoonDbContext context)
         {
-            if (!context.Passengers.Any())
+            if (!context.Users.Any())
             {
                 Random random = new Random();
 
                 var firstLastNames = GetFirstLastNames();
                 var locations = GetLocations();
+
+                var preferences = GetPreferences().ToList();
+
+                context.AddRange(preferences);
+
+                context.SaveChanges();
 
                 for (int i = 0; i < 100; i++)
                 {
@@ -56,13 +66,16 @@ namespace MyMoon.Infrastructure.Persistence
 
                     var destination = GetDestination(location);
 
-                    var passenger = new Passenger(firstLastName.first, firstLastName.last, random.RandomStar(), random.RandomIsRental(), null);
+                    var user = new User(firstLastName.first, firstLastName.last, null, (Gender)random.Next(2), random.Next(20, 35), random.RandomStar());
 
-                    passenger.Id = i + 1;
+                    context.Users.Add(user);
 
-                    context.Passengers.Add(passenger);
+                    var depDate = DateTime.Now.AddDays(random.Next(10));
+                    var arrivalDate = depDate.AddHours(random.Next(6));
 
-                    var route = new Route(location, destination, DateTime.Now.AddDays(random.Next(10)), random.RandomLagguageSize(), passenger.Id);
+                    var route = new Route(location, destination, depDate, arrivalDate, random.RandomLagguageSize(), user, random.RandomPrice(), random.Next(5));
+
+                    route.AddPreference(preferences.ElementAt(random.Next(4)));
 
                     context.Routes.Add(route);
                 }
@@ -82,6 +95,16 @@ namespace MyMoon.Infrastructure.Persistence
                     return dest;
                 }
             }
+        }
+
+        #region Utils
+
+        private static IEnumerable<Preference> GetPreferences()
+        {
+            yield return new Preference("მუსიკა");
+            yield return new Preference("მოწევა");
+            yield return new Preference("ცხოველები");
+            yield return new Preference("გაგრილება");
         }
 
         private static (string first, string last)[] GetFirstLastNames()
@@ -130,32 +153,14 @@ namespace MyMoon.Infrastructure.Persistence
 
             return size == 3 ? (LagguageSize?)null : (LagguageSize)size;
         }
+
+        private static decimal RandomPrice(this Random random)
+        {
+            var prices = new decimal[] { 5, 10 };
+            var index = random.Next(2);
+            return prices[index];
+        }
+
+        #endregion
     }
 }
-//using (var scope = host.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-
-//    try
-//    {
-//        var context = services.GetRequiredService<ApplicationDbContext>();
-
-//        if (context.Database.IsSqlServer())
-//        {
-//            context.Database.Migrate();
-//        }
-
-//        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-
-//        await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager);
-//        await ApplicationDbContextSeed.SeedSampleDataAsync(context);
-//    }
-//    catch (Exception ex)
-//    {
-//        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-
-//        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-
-//        throw;
-//    }
-//}

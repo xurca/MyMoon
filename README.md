@@ -4,6 +4,7 @@
 2. Add-Migration; Update-Database; Script-Migration;
 3. [migrations tutorial pmc](https://www.learnentityframeworkcore.com/migrations/commands/pmc-commands) 
 4. [migrations tutorial cli](https://www.learnentityframeworkcore.com/migrations/commands/cli-commands)
+5. Add-Migration InitialCreate -Project Infrastructure -OutputDir Persistence/Migrations
 
 ## Installation
 

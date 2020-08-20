@@ -14,7 +14,7 @@ namespace MyMoon.Infrastructure.Persistence
         IEventDispatcher _eventDispatcher;
 
         public DbSet<Route> Routes { get; set; }
-        public DbSet<Passenger> Passengers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public MyMoonDbContext(DbContextOptions<MyMoonDbContext> options, IEventDispatcher eventDispatcher) : base(options)
         {
@@ -29,6 +29,14 @@ namespace MyMoon.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyMoonDbContext).Assembly);
+
+            var types = modelBuilder.Model.GetEntityTypes().Where(x => typeof(AuditableEntity).IsAssignableFrom(x.ClrType));
+            
+            foreach (var type in types)
+            {
+                modelBuilder.Entity(type.ClrType, (b) => b.Property("CreatedBy").HasMaxLength(200));
+                modelBuilder.Entity(type.ClrType, (b) => b.Property("LastModifiedBy").HasMaxLength(200));
+            }
 
             base.OnModelCreating(modelBuilder);
         }
@@ -49,7 +57,7 @@ namespace MyMoon.Infrastructure.Persistence
 
         private async Task DispatchDomainEvents()
         {
-            var domainEventEntities = ChangeTracker.Entries<IEntity>()
+            var domainEventEntities = ChangeTracker.Entries<IAggregateRoot>()
                 .Select(po => po.Entity)
                 .Where(po => po.Events.Any())
                 .ToArray();
@@ -61,6 +69,11 @@ namespace MyMoon.Infrastructure.Persistence
                     await _eventDispatcher.DispatchAsync(@event);
                 }
             }
+        }
+
+        public virtual new DbSet<TEntity> Set<TEntity>() where TEntity : Entity
+        {
+            return base.Set<TEntity>();
         }
     }
 }

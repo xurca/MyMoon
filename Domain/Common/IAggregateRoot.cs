@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyMoon.Domain.Common
 {
-    public interface IEntity
+    public interface IAggregateRoot
     {
         IEnumerable<IEvent> Events { get; }
     }

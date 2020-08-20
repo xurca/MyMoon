@@ -19,11 +19,18 @@
     <Compile Remove="Persistence\Migrations\20200802202033_InitialCrete.Designer.cs" />
     <Compile Remove="Persistence\Migrations\20200802202058_InitialCreate.cs" />
     <Compile Remove="Persistence\Migrations\20200802202058_InitialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200820185101_InitialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200820185101_InitialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200820185705_InitialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200820185705_InitialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200820190639_InitialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200820190639_InitialCreate.Designer.cs" />
+    <Compile Remove="Persistence\Migrations\20200820190807_InitialCreate.cs" />
+    <Compile Remove="Persistence\Migrations\20200820190807_InitialCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Identity\" />
-    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

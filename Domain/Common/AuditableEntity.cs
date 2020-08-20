@@ -6,12 +6,12 @@ namespace MyMoon.Domain.Common
 {
     public abstract class AuditableEntity : Entity
     {
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; private set; }
 
-        public DateTime Created { get; set; }
+        public DateTime Created { get; private set; }
 
-        public string LastModifiedBy { get; set; }
+        public string LastModifiedBy { get; private set; }
 
-        public DateTime? LastModified { get; set; }
+        public DateTime? LastModified { get; private set; }
     }
 }
