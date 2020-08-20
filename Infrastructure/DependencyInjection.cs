@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MyMoon.Application.Common.Interfaces;
+using MyMoon.Infrastructure.EventDispatching;
 using MyMoon.Infrastructure.Persistence;
 
 namespace MyMoon.Infrastructure
@@ -28,6 +29,8 @@ namespace MyMoon.Infrastructure
                 });
 
             services.AddScoped<IDbContext>(provider => provider.GetService<MyMoonDbContext>());
+
+            services.AddScoped<IEventDispatcher>(provider => provider.GetService<EventDispatcher>());
 
             return services;
         }

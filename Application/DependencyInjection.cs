@@ -15,8 +15,6 @@ namespace MyMoon.Application
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IEventDispatcher>(provider => provider.GetService<EventDispatcher>());
-
             return services;
         }
     }
