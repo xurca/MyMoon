@@ -1,9 +1,8 @@
 import React from 'react';
+import RideView from '../../components/home/rides/ride-view';
 
 const Ride = () => (
-  <div>
-    Ride
-  </div>
+  <RideView/>
 );
 
 export default Ride;

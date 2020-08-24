@@ -12,7 +12,7 @@ export const StyledAvatar = styled(Avatar)(({ size, theme }) => {
       avatarPadding = 8;
       break;
     case 'large':
-      avatarPadding = 12;
+      avatarPadding = 16;
       break;
     default:
       avatarPadding = 8;
