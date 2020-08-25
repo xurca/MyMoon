@@ -6,9 +6,6 @@ namespace MyMoon.Application.Common.Interfaces
 {
     public interface IDbContext
     {
-        DbSet<Route> Routes { get; set; }
-        DbSet<User> Users { get; set; }
-
         DbSet<TEntity> Set<TEntity>() where TEntity : Entity;
     }
 }

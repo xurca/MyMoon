@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using MyMoon.Application.Routes.Queries;
-using System.Net;
 using System.Threading.Tasks;
 
-namespace Api.Controllers
+namespace MyMoon.Api.Controllers
 {
-    public class RoutesController : BaseController
+    public class UsersController : BaseController
     {
         [HttpGet]
-        [ProducesResponseType(typeof(GetRoutesQueryResponse), (int)StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetRoutesQueryResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetRoutesQueryResponse>> Get([FromQuery] GetRoutesQueryRequest request)
         {
             return await Mediator.Send(request);

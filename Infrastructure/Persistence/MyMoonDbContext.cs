@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyMoon.Application.Common.Interfaces;
 using MyMoon.Domain.Common;
 using MyMoon.Domain.Entities;
+using MyMoon.Domain.UserManagement;
 using MyMoon.Infrastructure.EventDispatching;
 using System.Linq;
 using System.Threading;
@@ -9,12 +11,9 @@ using System.Threading.Tasks;
 
 namespace MyMoon.Infrastructure.Persistence
 {
-    public class MyMoonDbContext : DbContext, IDbContext
+    public class MyMoonDbContext : IdentityDbContext<AppUser, Role, int>, IDbContext
     {
         IEventDispatcher _eventDispatcher;
-
-        public DbSet<Route> Routes { get; set; }
-        public DbSet<User> Users { get; set; }
 
         public MyMoonDbContext(DbContextOptions<MyMoonDbContext> options, IEventDispatcher eventDispatcher) : base(options)
         {
@@ -31,12 +30,33 @@ namespace MyMoon.Infrastructure.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyMoonDbContext).Assembly);
 
             var types = modelBuilder.Model.GetEntityTypes().Where(x => typeof(AuditableEntity).IsAssignableFrom(x.ClrType));
-            
+
             foreach (var type in types)
             {
                 modelBuilder.Entity(type.ClrType, (b) => b.Property("CreatedBy").HasMaxLength(200));
                 modelBuilder.Entity(type.ClrType, (b) => b.Property("LastModifiedBy").HasMaxLength(200));
             }
+
+            modelBuilder.Entity<AppUser>().ToTable("Users");
+
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaims");
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<Role>().ToTable("Roles");
+            modelBuilder.Entity<UserToken>().ToTable("UserTokens");
+            modelBuilder.Entity<RoleClaim>().ToTable("RoleClaims");
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role()
+                {
+                    Name = "Administrator",
+                    NormalizedName = "ADMINISTRATOR"
+                },
+                new Role()
+                {
+                    Name = "Registered",
+                    NormalizedName = "REGISTERED"
+                });
 
             base.OnModelCreating(modelBuilder);
         }

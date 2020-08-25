@@ -1,3 +1,12 @@
+## Branching  
+`<branch-type>/<ticket-number>-<branch-short-description>` **Description in lower-case**
+> Example  `bugfix/SBO-1-fixed-someshit`
+### Branch Types
+- feature
+- bugfix
+- hotfix
+- chore
+
 ## Enable Migrations
 
 1. Install-Package Microsoft.EntityFrameworkCore.Tools
@@ -5,6 +14,7 @@
 3. [migrations tutorial pmc](https://www.learnentityframeworkcore.com/migrations/commands/pmc-commands) 
 4. [migrations tutorial cli](https://www.learnentityframeworkcore.com/migrations/commands/cli-commands)
 5. Add-Migration InitialCreate -Project Infrastructure -OutputDir Persistence/Migrations
+6. Remove-Migration -Project Infrastructure -Force
 
 ## Installation
 

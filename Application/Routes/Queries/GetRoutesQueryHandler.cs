@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyMoon.Application.Common.Interfaces;
+using MyMoon.Domain.Entities;
 using System;
 using System.Linq;
 using System.Threading;
@@ -22,9 +23,9 @@ namespace MyMoon.Application.Routes.Queries
 
         public async Task<GetRoutesQueryResponse> Handle(GetRoutesQueryRequest request, CancellationToken cancellationToken)
         {
-            var totalCount = await _context.Routes.CountAsync();
+            var totalCount = await _context.Set<Route>().AsNoTracking().CountAsync();
 
-            var result = await _context.Routes
+            var result = await _context.Set<Route>()
                 .AsNoTracking()
                 .Include(x => x.User)
                 .Include(x => x.Preferences)

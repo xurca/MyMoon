@@ -30,7 +30,8 @@ namespace MyMoon.Infrastructure.Persistence
                         if (context.Database.IsNpgsql())
                             context.Database.Migrate();
 
-                        await SeedData(context);
+                        //await SeedData(context);
+                        await Task.FromResult(0);
                     }
                     catch (Exception ex)
                     {
@@ -42,7 +43,7 @@ namespace MyMoon.Infrastructure.Persistence
 
             return host;
         }
-
+        /*
         private async static Task SeedData(MyMoonDbContext context)
         {
             if (!context.Users.Any())
@@ -96,7 +97,7 @@ namespace MyMoon.Infrastructure.Persistence
                 }
             }
         }
-
+        */
         #region Utils
 
         private static IEnumerable<Preference> GetPreferences()
