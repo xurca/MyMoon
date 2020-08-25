@@ -75,7 +75,7 @@ namespace MyMoon.Infrastructure.Persistence
 
                     var route = new Route(location, destination, depDate, arrivalDate, random.RandomLagguageSize(), user, random.RandomPrice(), random.Next(5));
 
-                    route.AddPreference(preferences.ElementAt(random.Next(4)));
+                    route.WithPreference(preferences.ElementAt(random.Next(4)));
 
                     context.Routes.Add(route);
                 }

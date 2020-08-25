@@ -40,7 +40,7 @@ namespace MyMoon.Domain.Entities
             Preferences = new HashSet<RoutePreference>();
         }
 
-        public void AddPreference(Preference preference)
+        public void WithPreference(Preference preference)
         {
             Preferences.Add(new RoutePreference(preference));
         }

@@ -6,4 +6,8 @@
     <AssemblyName>MyMoon.Domain</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="UserManagement\" />
+  </ItemGroup>
+
 </Project>
