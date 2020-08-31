@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyMoon.Application;
 using MyMoon.Infrastructure;
+using System;
 
 namespace Api
 {
@@ -34,12 +29,20 @@ namespace Api
             services.AddHttpContextAccessor();
             services.AddHealthChecks();
             services.AddControllers();
+            //.AddFluentValidation(options => options.RegisterValidatorsFromAssembly(typeof(MyMoon.Application.DependencyInjection).Assembly));
 
             //services.AddOpenApiDocument();
             services.AddSwaggerDocument((opt) =>
             {
                 opt.Version = "v1";
                 opt.Title = "My Moon";
+            });
+
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = "/Users/Login";
+                config.SlidingExpiration = true;
+                config.ExpireTimeSpan = TimeSpan.FromMinutes(40);
             });
         }
 
@@ -68,6 +71,7 @@ namespace Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

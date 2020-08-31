@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MyMoon.Infrastructure.Persistence
 {
-    public class MyMoonDbContext : IdentityDbContext<AppUser, Role, int>, IDbContext
+    public class MyMoonDbContext : DbContext, IDbContext
     {
         IEventDispatcher _eventDispatcher;
 
@@ -37,26 +37,12 @@ namespace MyMoon.Infrastructure.Persistence
                 modelBuilder.Entity(type.ClrType, (b) => b.Property("LastModifiedBy").HasMaxLength(200));
             }
 
-            modelBuilder.Entity<AppUser>().ToTable("Users");
-
             modelBuilder.Entity<UserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<UserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<UserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<Role>().ToTable("Roles");
             modelBuilder.Entity<UserToken>().ToTable("UserTokens");
+            modelBuilder.Entity<Role>().ToTable("Roles");
             modelBuilder.Entity<RoleClaim>().ToTable("RoleClaims");
-
-            modelBuilder.Entity<Role>().HasData(
-                new Role()
-                {
-                    Name = "Administrator",
-                    NormalizedName = "ADMINISTRATOR"
-                },
-                new Role()
-                {
-                    Name = "Registered",
-                    NormalizedName = "REGISTERED"
-                });
 
             base.OnModelCreating(modelBuilder);
         }
@@ -70,8 +56,14 @@ namespace MyMoon.Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
+            this.Database.BeginTransaction();
+
             await DispatchDomainEvents();
+
             var res = await base.SaveChangesAsync(cancellationToken);
+
+            this.Database.CommitTransaction();
+
             return res;
         }
 
@@ -94,6 +86,11 @@ namespace MyMoon.Infrastructure.Persistence
         public virtual new DbSet<TEntity> Set<TEntity>() where TEntity : Entity
         {
             return base.Set<TEntity>();
+        }
+
+        public Task<int> SaveAsync(CancellationToken cancellationToken = default)
+        {
+            return SaveChangesAsync(cancellationToken);
         }
     }
 }

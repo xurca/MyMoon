@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MyMoon.Domain.Entities;
 using MyMoon.Domain.UserManagement;
 
 namespace MyMoon.Infrastructure.Persistence.Configurations
@@ -17,7 +16,6 @@ namespace MyMoon.Infrastructure.Persistence.Configurations
                 x.Property(x => x.Extension).HasMaxLength(10).HasColumnName("ProfilePictureExtension");
             });
             builder.Property(x => x.About).HasMaxLength800();
-            builder.HasOne(x => x.AppUser).WithOne().HasForeignKey<AppUser>(x => x.Id);
 
             builder.ToTable("Users");
         }

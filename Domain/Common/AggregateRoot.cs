@@ -11,12 +11,12 @@ namespace MyMoon.Domain.Common
 
         public IEnumerable<IEvent> Events => _events.Values;
 
-        protected void AddEvent(IEvent @event)
+        public void AddEvent(IEvent @event)
         {
             _events.TryAdd(@event.GetType(), @event);
         }
 
-        protected void ClearEvents()
+        public void ClearEvents()
         {
             _events.Clear();
         }

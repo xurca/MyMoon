@@ -35,7 +35,7 @@ namespace MyMoon.Application.Routes.Queries
         public decimal TotalSeats { get; set; }
         public decimal Rating { get; set; }
         public int Age { get; set; }
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
         public IEnumerable<string> Preferences { get; set; }
     }
 
