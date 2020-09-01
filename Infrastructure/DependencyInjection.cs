@@ -36,7 +36,6 @@ namespace MyMoon.Infrastructure
 
             services.AddScoped<IEventDispatcher, EventDispatcher>();
 
-
             services.AddIdentity<User, Role>(opt =>
             {
                 opt.SignIn.RequireConfirmedEmail = false;
