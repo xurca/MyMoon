@@ -25,7 +25,7 @@ namespace MyMoon.Infrastructure.Persistence
                 {
                     try
                     {
-                        //context.Database.EnsureDeleted();
+                        context.Database.EnsureDeleted();
 
                         if (context.Database.IsNpgsql())
                             context.Database.Migrate();
