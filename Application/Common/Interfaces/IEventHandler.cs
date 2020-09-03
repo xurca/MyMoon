@@ -1,7 +1,7 @@
 ﻿using MyMoon.Domain.Common;
 using System.Threading.Tasks;
 
-namespace MyMoon.Infrastructure.EventDispatching
+namespace MyMoon.Application.Common.Interfaces
 {
     public interface IEventHandler<in T> where T : IEvent
     {

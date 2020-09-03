@@ -1,5 +1,6 @@
 ﻿using MyMoon.Domain.Common;
 using MyMoon.Domain.Enums;
+using MyMoon.Domain.UserManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,4 +1,7 @@
-﻿using MyMoon.Domain.Common;
+﻿using FluentValidation.Validators;
+using Microsoft.Extensions.DependencyInjection;
+using MyMoon.Application.Common.Interfaces;
+using MyMoon.Domain.Common;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -30,11 +33,7 @@ namespace MyMoon.Infrastructure.EventDispatching
                 if (handler == null)
                     return;
 
-                var method = handler.GetType()
-                    .GetRuntimeMethods()
-                    .First(x => x.Name.Equals("HandleAsync"));
-
-                await (Task)((dynamic)handler).HandleAsync(@event);
+                await (Task)((dynamic)handler).HandleAsync((dynamic)@event);
             }
         }
     }
