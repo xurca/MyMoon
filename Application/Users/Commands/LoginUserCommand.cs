@@ -14,7 +14,7 @@ namespace MyMoon.Application.Users.Commands
         public bool RememberMe { get; set; }
     }
 
-    public class LoginUserCommandResponse : CommandResult
+    public class LoginUserCommandResponse : Result
     {
         public string AccessToken { get; set; }
     }

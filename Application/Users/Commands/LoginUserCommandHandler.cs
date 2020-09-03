@@ -65,7 +65,7 @@ namespace MyMoon.Application.Users.Commands
                 response.Succeeded = true;
             }
             else
-                response.Errors.Add(new CommandError("UserNotFound", "User not found"));
+                response.Errors.Add(new Error("UserNotFound", "User not found"));
 
             return response;
         }

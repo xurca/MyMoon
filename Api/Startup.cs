@@ -14,6 +14,7 @@ using System.Text;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using MyMoon.Api.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Api
 {
@@ -59,6 +60,13 @@ namespace Api
                         ValidAudience = _configuration.GetSection("JWTTokenSettings").GetValue<string>("ValidAudience"),
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWTTokenSettings").GetValue<string>("Key"))),
                     };
+                })
+                .AddGoogle("google", opt =>
+                {
+                    var googleAuth = _configuration.GetSection("Authentication:Google");
+                    opt.ClientId = googleAuth["ClientId"];
+                    opt.ClientSecret = googleAuth["ClientSecret"];
+                    opt.SignInScheme = IdentityConstants.ExternalScheme;
                 });
 
             services.ConfigureApplicationCookie(config =>
@@ -67,6 +75,28 @@ namespace Api
                 config.LoginPath = "/Account/Login";
                 config.SlidingExpiration = true;
                 config.ExpireTimeSpan = TimeSpan.FromHours(1);
+            });
+
+            //Policy
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+
+            services.AddAuthorization(opts =>
+            {
+                // TODO Add postible policies.
+                opts.DefaultPolicy = policy;
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowAll",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin();
+                                      builder.AllowAnyMethod();
+                                      builder.AllowAnyHeader();
+                                  });
             });
 
             services.AddSwaggerGen(x =>
@@ -99,28 +129,6 @@ namespace Api
                     Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
                 });
             });
-
-            //Policy
-            var policy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .Build();
-
-            services.AddAuthorization(opts =>
-            {
-                // TODO Add postible policies.
-                opts.DefaultPolicy = policy;
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "testCors",
-                                  builder =>
-                                  {
-                                      builder.AllowAnyOrigin();
-                                      builder.AllowAnyMethod();
-                                      builder.AllowAnyHeader();
-                                  });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -136,7 +144,7 @@ namespace Api
             app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors("testCors");
+            app.UseCors("AllowAll");
 
             app.UseAuthentication();
             app.UseAuthorization();

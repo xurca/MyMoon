@@ -5,14 +5,14 @@ using System.Text;
 
 namespace MyMoon.Application.Common.Models
 {
-    public class CommandResult
+    public class Result
     {
         public bool Succeeded { get; set; }
-        public List<CommandError> Errors { get; set; }
+        public List<Error> Errors { get; set; }
 
-        public CommandResult()
+        public Result()
         {
-            Errors = new List<CommandError>();
+            Errors = new List<Error>();
         }
 
         //public CommandResult(bool succeeded, IEnumerable<string> errors)

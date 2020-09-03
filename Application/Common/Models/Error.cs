@@ -4,14 +4,14 @@ using System.Text;
 
 namespace MyMoon.Application.Common.Models
 {
-    public class CommandError
+    public class Error
     {
-        public CommandError()
+        public Error()
         {
 
         }
 
-        public CommandError(string errorCode, string errorMessage)
+        public Error(string errorCode, string errorMessage)
         {
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;

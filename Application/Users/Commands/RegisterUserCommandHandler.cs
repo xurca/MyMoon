@@ -35,7 +35,7 @@ namespace MyMoon.Application.Users.Commands
                 return new RegisterUserCommandResponse()
                 {
                     Succeeded = false,
-                    Errors = result.Errors.Select(e => new CommandError(e.Code, e.Description)).ToList()
+                    Errors = result.Errors.Select(e => new Error(e.Code, e.Description)).ToList()
                 };
             }
 

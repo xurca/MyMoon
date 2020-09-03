@@ -16,7 +16,7 @@ namespace MyMoon.Application.Users.Commands
         public string PasswordConfirm { get; set; }
     }
 
-    public class RegisterUserCommandResponse : CommandResult
+    public class RegisterUserCommandResponse : Result
     {
         public int Id { get; set; }
     }

@@ -10,7 +10,7 @@ namespace MyMoon.Application.Common.Behaviors
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
-        where TResponse : CommandResult, new()
+        where TResponse : Result, new()
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -29,7 +29,7 @@ namespace MyMoon.Application.Common.Behaviors
                 var failures = validationResults
                     .SelectMany(r => r.Errors)
                     .Where(f => f != null)
-                    .Select(f => new CommandError()
+                    .Select(f => new Error()
                     {
                         ErrorCode = f.ErrorCode,
                         ErrorMessage = f.ErrorMessage

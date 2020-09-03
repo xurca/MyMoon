@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMoon.Application.Users.Commands;
+using MyMoon.Application.Users.Queries;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -19,11 +20,40 @@ namespace MyMoon.Api.Controllers
         }
 
         [HttpPost("/Account/Login")]
-        //[Route("login")]
         [ProducesResponseType(typeof(LoginUserCommandResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<LoginUserCommandResponse>> Login([FromBody] LoginUserCommandRequest request)
         {
             return await Mediator.Send(request);
+        }
+
+        [HttpGet("/get-providers")]
+        [ProducesResponseType(typeof(GetProvidersQueryResponse), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetProvidersQueryResponse>> GetProviders()
+        {
+            return await Mediator.Send(new GetProvidersQueryRequest());
+        }
+
+        [HttpGet]
+        [Route("/Account/ExternalLogin")]
+        [ProducesResponseType(typeof(ExternalLoginQueryResponse), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ExternalLoginQueryResponse>> ExternalLogin(string provider, string returnUrl)
+        {
+            var res = await Mediator.Send(new ExternalLoginQueryRequest()
+            {
+                Provider = provider,
+                ReturnUrl = returnUrl,
+                RedirectUrl = Url.Action(nameof(ExternalLoginCallback), "Users", new { returnUrl })
+            });
+
+            return Challenge(res.Properties, provider);
+        }
+
+        [HttpGet]
+        [Route("/Account/ExternalLoginCallback")]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
+        {
+            var res = await Mediator.Send(new ExternalLoginCallbackQueryRequest());
+            return Ok();
         }
 
         //[HttpGet]
