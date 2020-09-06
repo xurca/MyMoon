@@ -55,7 +55,7 @@ namespace MyMoon.Api.Controllers
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
         {
             var res = await Mediator.Send(new ExternalLoginCallbackQueryRequest() { ReturnUrl = returnUrl });
-            return res;
+            return Ok(res);
         }
 
         //[HttpGet]
