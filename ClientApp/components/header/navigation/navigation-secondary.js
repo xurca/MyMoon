@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Flag from '../../shared/flag';
 import IconButton from '@material-ui/core/IconButton';
 import UserMenu from '../user-menu';
+import LoginAction from '../../auth/login-action';
 
 const OfferButton = styled(Button)(({ theme }) => ({
   marginLeft: theme.spacing(1.5),
@@ -32,9 +33,7 @@ const NavigationSecondary = () => {
       {authenticated ?
         <UserMenu/> :
         <>
-          <Button>
-            შესვლა
-          </Button>
+          <LoginAction />
           <Button>
             რეგისტრაცია
           </Button>

@@ -1,13 +1,14 @@
-import React from 'react'
-import Dialog from '@material-ui/core/Dialog'
-import Box from '@material-ui/core/Box'
-import Divider from '@material-ui/core/Divider'
-import * as S from './styles'
-import Button from '@material-ui/core/Button'
-import Draggable from 'react-draggable'
-import Close from '@material-ui/icons/Close'
-import Tooltip from '@material-ui/core/Tooltip'
+import React from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
+import * as S from './styles';
+import Button from '@material-ui/core/Button';
+import Draggable from 'react-draggable';
+import Close from '@material-ui/icons/Close';
+import Tooltip from '@material-ui/core/Tooltip';
 import SubmitButton from '../form-elements/submit-button';
+import Typography from '@material-ui/core/Typography';
 
 const Modal = ({
   title,
@@ -76,12 +77,14 @@ const Modal = ({
               color="secondary"
               disabled={submitting}
             >
-              {cancelText}
+              <Typography variant='caption' noWrap>
+                {cancelText}
+              </Typography>
             </Button>
           </S.Actions>
         </>)}
     </Dialog>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

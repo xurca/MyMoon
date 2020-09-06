@@ -39,3 +39,8 @@
 - https://localhost:5001/swagger/index.html
 - dotnet build
 - dotnet run --project api
+
+## Launch react app
+- from the terminal navigate to ClientApp directory
+- run "npm install" command (Only for the first time to download required dependencies)
+- run "npm run dev" which will run the development server on 3000 port
