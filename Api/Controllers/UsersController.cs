@@ -1,5 +1,6 @@
 ﻿using Api.Controllers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MyMoon.Application.Users.Commands;
 using MyMoon.Application.Users.Queries;
@@ -34,9 +35,10 @@ namespace MyMoon.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpGet]
         [Route("/Account/ExternalLogin")]
         [ProducesResponseType(typeof(ExternalLoginQueryResponse), (int)HttpStatusCode.OK)]
+        [EnableCors("AllowAll")]
         public async Task<ActionResult<ExternalLoginQueryResponse>> ExternalLogin(string provider, string returnUrl)
         {
             var res = await Mediator.Send(new ExternalLoginQueryRequest()
