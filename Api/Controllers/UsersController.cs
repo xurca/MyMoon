@@ -45,15 +45,17 @@ namespace MyMoon.Api.Controllers
                 RedirectUrl = Url.Action(nameof(ExternalLoginCallback), "Users", new { returnUrl })
             });
 
-            return Challenge(res.Properties, provider);
+            var resp = new ChallengeResult(provider, res.Properties);
+
+            return Ok(resp);
         }
 
         [HttpGet]
         [Route("/Account/ExternalLoginCallback")]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
         {
-            var res = await Mediator.Send(new ExternalLoginCallbackQueryRequest());
-            return Ok();
+            var res = await Mediator.Send(new ExternalLoginCallbackQueryRequest() { ReturnUrl = returnUrl });
+            return res;
         }
 
         //[HttpGet]

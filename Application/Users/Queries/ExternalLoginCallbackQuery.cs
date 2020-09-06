@@ -9,7 +9,7 @@ namespace MyMoon.Application.Users.Queries
 {
     public class ExternalLoginCallbackQueryRequest : IRequest<ExternalLoginCallbackQueryResponse>
     {
-
+        public string ReturnUrl { get; set; }
     }
 
     public class ExternalLoginCallbackQueryResponse : Result
