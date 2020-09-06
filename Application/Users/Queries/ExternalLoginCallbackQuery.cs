@@ -17,5 +17,6 @@ namespace MyMoon.Application.Users.Queries
         public bool Succeeded { get; set; }
         public bool IsLockedOut { get; set; }
         public string Email { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

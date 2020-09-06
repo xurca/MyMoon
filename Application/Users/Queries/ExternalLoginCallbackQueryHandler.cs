@@ -65,12 +65,12 @@ namespace MyMoon.Application.Users.Queries
 
             var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
 
-            if(signInResult.Succeeded)
+            if (signInResult.Succeeded)
                 return new ExternalLoginCallbackQueryResponse()
                 {
                     Succeeded = true,
-                    t = request.
-                }
+                    ReturnUrl = request.ReturnUrl
+                };
 
             if (signInResult.IsLockedOut)
             {
