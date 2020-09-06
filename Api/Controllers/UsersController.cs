@@ -45,9 +45,7 @@ namespace MyMoon.Api.Controllers
                 RedirectUrl = Url.Action(nameof(ExternalLoginCallback), "Users", new { returnUrl })
             });
 
-            var resp = new ChallengeResult(provider, res.Properties);
-
-            return Ok(resp);
+            return Challenge(res.Properties, provider);
         }
 
         [HttpGet]
