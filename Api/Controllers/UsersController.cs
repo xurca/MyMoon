@@ -33,7 +33,7 @@ namespace MyMoon.Api.Controllers
             return await Mediator.Send(new GetProvidersQueryRequest());
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("/Account/ExternalLogin")]
         [ProducesResponseType(typeof(ExternalLoginQueryResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ExternalLoginQueryResponse>> ExternalLogin(string provider, string returnUrl)
