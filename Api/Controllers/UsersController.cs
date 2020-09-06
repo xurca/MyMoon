@@ -33,6 +33,7 @@ namespace MyMoon.Api.Controllers
             return await Mediator.Send(new GetProvidersQueryRequest());
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("/Account/ExternalLogin")]
         [ProducesResponseType(typeof(ExternalLoginQueryResponse), (int)HttpStatusCode.OK)]
@@ -48,6 +49,7 @@ namespace MyMoon.Api.Controllers
             return Challenge(res.Properties, provider);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("/Account/ExternalLoginCallback")]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
