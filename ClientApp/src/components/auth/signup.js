@@ -4,11 +4,12 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import {FaLongArrowAltLeft} from 'react-icons/fa'
 import Box from '@material-ui/core/Box'
+import Link from '@material-ui/core/Link'
 
-const Signup = ({ setType }) => {
+const Signup = ({setType}) => {
 
   const handleSubmit = event => {
-      event.preventDefault()
+    event.preventDefault()
   }
 
   return (
@@ -61,7 +62,12 @@ const Signup = ({ setType }) => {
               autoComplete="current-password"
               style={{marginBottom: 12}}
           />
-
+          <Box mb={1}>
+            <Typography variant='body2' align='center'>
+              საიტზე რეგისტრაციით თქვენ ეთახმებით ჩვენს <br/>
+              <Link href='#' underline='always'>წესებსა და პირობებს</Link>
+            </Typography>
+          </Box>
           <Button
               type="submit"
               fullWidth
