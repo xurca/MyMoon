@@ -19,6 +19,7 @@
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-draggable": "^4.4.3"
+    "react-draggable": "^4.4.3",
+    "react-icons": "^3.11.0"
   }
 }

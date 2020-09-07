@@ -3,7 +3,7 @@ import useToggle from '../../hooks/use-toggle';
 import Button from '@material-ui/core/Button';
 import AuthModal from './auth-modal';
 
-const LoginAction = () => {
+const LoginAction = ({ type }) => {
   const { open, handleOpen, handleClose } = useToggle()
 
   return (
