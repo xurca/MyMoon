@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import FlexBox from '../../shared/flex-box';
@@ -10,6 +10,7 @@ import Flag from '../../shared/flag';
 import IconButton from '@material-ui/core/IconButton';
 import UserMenu from '../user-menu';
 import LoginAction from '../../auth/login-action';
+import SignupAction from '../../auth/signup-action'
 
 const OfferButton = styled(Button)(({ theme }) => ({
   marginLeft: theme.spacing(1.5),
@@ -17,6 +18,7 @@ const OfferButton = styled(Button)(({ theme }) => ({
 }));
 
 const NavigationSecondary = () => {
+  const [type, setType] = useState()
 
   const authenticated = false;
 
@@ -33,10 +35,8 @@ const NavigationSecondary = () => {
       {authenticated ?
         <UserMenu/> :
         <>
-          <LoginAction />
-          <Button>
-            რეგისტრაცია
-          </Button>
+          <LoginAction type={type} setType={setType}/>
+          <SignupAction type={type} setType={setType}/>
         </>
       }
       <FlexBox alignItems='center' ml={1}>

@@ -17,10 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AuthModal = ({open, onClose, typeProp = 'login'}) => {
-  const [type, setType] = useState(typeProp)
+const AuthModal = ({open, onClose, type = 'login', setType}) => {
   const classes = useStyles();
-
   let authComponent;
 
   if (type === 'login') {

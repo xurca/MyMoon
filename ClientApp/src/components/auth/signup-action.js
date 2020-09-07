@@ -3,18 +3,18 @@ import useToggle from '../../hooks/use-toggle';
 import Button from '@material-ui/core/Button';
 import AuthModal from './auth-modal';
 
-const LoginAction = ({ type, setType }) => {
-  const { open, handleOpen, handleClose } = useToggle();
+const SignupAction = ({ type, setType }) => {
+  const { open, handleOpen, handleClose } = useToggle()
 
   const handleSignupOpen = () => {
-    setType('login');
-    handleOpen();
+    setType('signup');
+    handleOpen()
   }
 
   return (
     <>
       <Button onClick={handleSignupOpen}>
-        შესვლა
+        რეგისტრაცია
       </Button>
       <AuthModal
         open={open}
@@ -26,4 +26,4 @@ const LoginAction = ({ type, setType }) => {
   );
 };
 
-export default LoginAction;
+export default SignupAction;
