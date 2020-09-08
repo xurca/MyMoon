@@ -15,21 +15,21 @@ namespace MyMoon.Api.Controllers
     public class UsersController : BaseController
     {
         [HttpPost]
-        [Route("/Account/Register")]
+        [Route("/api/account/register")]
         [ProducesResponseType(typeof(RegisterUserCommandResponse), (int)HttpStatusCode.Created)]
         public async Task<ActionResult<RegisterUserCommandResponse>> Register([FromBody] RegisterUserCommandRequest request)
         {
             return await Mediator.Send(request);
         }
 
-        [HttpPost("/Account/Login")]
+        [HttpPost("/api/account/login")]
         [ProducesResponseType(typeof(LoginUserCommandResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<LoginUserCommandResponse>> Login([FromBody] LoginUserCommandRequest request)
         {
             return await Mediator.Send(request);
         }
 
-        [HttpGet("/get-providers")]
+        [HttpGet("/api/auth/providers")]
         [ProducesResponseType(typeof(GetProvidersQueryResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetProvidersQueryResponse>> GetProviders()
         {
@@ -38,7 +38,7 @@ namespace MyMoon.Api.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("/Account/ExternalLogin")]
+        [Route("/api/account/externalLogin")]
         [ProducesResponseType(typeof(ExternalLoginQueryResponse), (int)HttpStatusCode.OK)]
         [EnableCors("AllowAll")]
         public async Task<ActionResult<ExternalLoginQueryResponse>> ExternalLogin(string provider, string returnUrl)
@@ -53,30 +53,31 @@ namespace MyMoon.Api.Controllers
             return Challenge(res.Properties, provider);
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [AllowAnonymous]
         [HttpGet]
-        [Route("/Account/ExternalLoginCallback")]
+        [Route("/api/account/externallogincallback")]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
         {
             var res = await Mediator.Send(new ExternalLoginCallbackQueryRequest() { ReturnUrl = returnUrl });
             return Ok(res);
         }
 
-        //[HttpGet]
-        //[Route("details")]
-        //[Authorize]
-        //public ActionResult Details()
-        //{
-        //    return Ok(new
-        //    {
-        //        Claims = HttpContext.User.Claims.Select(x => new
-        //        {
-        //            x.Type,
-        //            x.Value
-        //        }),
-        //        HttpContext.User.Identity.Name,
-        //        HttpContext.User.Identity.IsAuthenticated
-        //    });
-        //}
+        [HttpGet]
+        [Route("details")]
+        [Authorize]
+        public ActionResult Details()
+        {
+            return Ok(new
+            {
+                Claims = HttpContext.User.Claims.Select(x => new
+                {
+                    x.Type,
+                    x.Value
+                }),
+                HttpContext.User.Identity.Name,
+                HttpContext.User.Identity.IsAuthenticated
+            });
+        }
     }
 }

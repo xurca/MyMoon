@@ -74,7 +74,7 @@ namespace Api
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.HttpOnly = true;
-                config.LoginPath = "/Account/Login";
+                config.LoginPath = "/api/account/login";
                 config.SlidingExpiration = true;
                 config.ExpireTimeSpan = TimeSpan.FromHours(1);
             });
@@ -86,7 +86,6 @@ namespace Api
 
             services.AddAuthorization(opts =>
             {
-                // TODO Add postible policies.
                 opts.DefaultPolicy = policy;
             });
 
