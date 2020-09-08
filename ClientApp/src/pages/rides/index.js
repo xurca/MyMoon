@@ -12,7 +12,7 @@ import FlexBox from '../../components/shared/flex-box';
 import Typography from '@material-ui/core/Typography';
 import FiltersModal from '../../components/home/rides/filters-modal';
 import Searchbar from '../../components/home/searchbar';
-import RidesList from '../../components/home/rides/rides-list';
+import RidesList from '../../../components/home/rides/rides-list';
 
 export default function Rides() {
   const theme = useTheme();
