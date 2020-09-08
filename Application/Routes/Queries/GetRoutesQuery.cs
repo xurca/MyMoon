@@ -17,7 +17,7 @@ namespace MyMoon.Application.Routes.Queries
         public DateTime? To { get; set; }
     }
 
-    public class GetRoutesQueryResponse
+    public class GetRoutesQueryResponse : Result
     {
         public IEnumerable<GetRoutesQueryItem> Items { get; set; }
         public int Total { get; set; }
