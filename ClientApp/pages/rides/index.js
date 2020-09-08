@@ -1,33 +1,30 @@
 import React from 'react';
-import Hidden from '@material-ui/core/Hidden';
-import Searchbar from '../../components/home/searchbar';
 import { ContentContainer } from '../../components/shared/content-container';
 import Grid from '@material-ui/core/Grid';
-import RidesToolbar from '../../components/home/rides/rides-toolbar';
-import RideItem from '../../components/home/rides/ride-item/ride-item';
 import { useMediaQuery } from '@material-ui/core';
 import useTheme from '@material-ui/core/styles/useTheme';
-import Toolbar from '@material-ui/core/Toolbar';
+import Hidden from '@material-ui/core/Hidden';
+import FiltersForm from '../../components/home/rides/filters-form';
+import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
+import Toolbar from '@material-ui/core/Toolbar';
 import FlexBox from '../../components/shared/flex-box';
 import Typography from '@material-ui/core/Typography';
 import FiltersModal from '../../components/home/rides/filters-modal';
-import FiltersForm from '../../components/home/rides/filters-form';
-import RideItemResponsive from '../../components/home/rides/ride-item/ride-item-responsive';
-import Box from '@material-ui/core/Box';
-import { useRouter } from 'next/router';
+import Searchbar from '../../components/home/searchbar';
+import RidesList from '../../components/home/rides/rides-list';
 
 export default function Rides() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const router = useRouter()
+  /*const router = useRouter()
 
   const handleRideClick = (rideId) => {
     router.push(
       '/rides/[id]',
       `/rides/${rideId}`
     );
-  }
+  }*/
 
   return (
     <div>
@@ -40,26 +37,7 @@ export default function Rides() {
             </Grid>
           </Hidden>
           <Grid item xs={12} md={9} style={matches ? { paddingTop: 0 } : {}}>
-            <Hidden smDown>
-              <RidesToolbar/>
-              <RideItem onClick={() => handleRideClick(1)}/>
-              <RideItem onClick={() => handleRideClick(2)}/>
-              <RideItem onClick={() => handleRideClick(3)}/>
-            </Hidden>
-            <Hidden mdUp>
-              <RideItemResponsive
-                rideDate='Today'
-                rideTime='10:33'
-                settings='settings'
-                description='description'
-                bookedSeats='bookedSeats'
-                plateNumber='ANZ-224'
-                driver='გელა'
-                onClick={handleRideClick}
-              />
-              <RideItemResponsive/>
-              <RideItemResponsive/>
-            </Hidden>
+            <RidesList/>
           </Grid>
         </Grid>
       </ContentContainer>

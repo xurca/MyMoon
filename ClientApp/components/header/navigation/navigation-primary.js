@@ -70,7 +70,7 @@ const NavigationPrimary = () => {
           </Link>
         </li>
         <li className={router.pathname === '/contact' ? 'active' : ''}>
-          <Link href="/contact">
+          <Link href="/contact" as='/contact'>
             <a>{t('Contact us')}</a>
           </Link>
         </li>
