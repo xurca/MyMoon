@@ -2,8 +2,9 @@
   "name": "ride-sharing",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5001",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -20,6 +21,12 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-draggable": "^4.4.3",
-    "react-icons": "^3.11.0"
+    "react-icons": "^3.11.0",
+    "react-query": "^2.15.4",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5"
   }
 }

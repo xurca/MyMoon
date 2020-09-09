@@ -1,7 +1,7 @@
 import React from 'react';
 import Hidden from '@material-ui/core/Hidden';
-import RidesToolbar from '../../../src/components/home/rides/rides-toolbar';
-import RideItem from '../../../src/components/home/rides/ride-item/ride-item';
+import RidesToolbar from './rides-toolbar';
+import RideItem from './ride-item/ride-item';
 
 export default function RidesList() {
   const rides = [
