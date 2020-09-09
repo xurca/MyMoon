@@ -54,7 +54,8 @@ namespace MyMoon.Application.Routes.Queries
             return new GetRoutesQueryResponse
             {
                 Items = result,
-                Total = totalCount
+                Total = totalCount,
+                Succeeded = true
             };
         }
     }
