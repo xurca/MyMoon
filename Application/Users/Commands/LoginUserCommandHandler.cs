@@ -58,8 +58,7 @@ namespace MyMoon.Application.Users.Commands
 
                 var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-                var res = await _signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false);
-                //await _signInManager.SignInAsync(user, request.RememberMe);
+                await _signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false);
 
                 response.AccessToken = accessToken;
                 response.Succeeded = true;

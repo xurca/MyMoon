@@ -21,6 +21,7 @@ namespace MyMoon.Application.Users.Queries
 
             return new ExternalLoginQueryResponse()
             {
+                Succeeded = true,
                 Properties = properties
             };
         }

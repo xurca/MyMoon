@@ -69,6 +69,9 @@ namespace Api
                     opt.ClientId = googleAuth["ClientId"];
                     opt.ClientSecret = googleAuth["ClientSecret"];
                     opt.SignInScheme = IdentityConstants.ExternalScheme;
+                    opt.Scope.Add("openid");
+                    opt.Scope.Add("profile");
+                    opt.Scope.Add("email");
                 });
 
             services.ConfigureApplicationCookie(config =>

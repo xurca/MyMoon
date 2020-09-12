@@ -1,10 +1,12 @@
 ﻿using Api.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using MyMoon.Application.Users.Commands;
 using MyMoon.Application.Users.Queries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,21 +18,35 @@ namespace MyMoon.Api.Controllers
     {
         [HttpPost]
         [Route("/api/account/register")]
-        [ProducesResponseType(typeof(RegisterUserCommandResponse), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(RegisterUserCommandResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<RegisterUserCommandResponse>> Register([FromBody] RegisterUserCommandRequest request)
         {
-            return await Mediator.Send(request);
+            var resp = await Mediator.Send(request);
+
+            if (!resp.Succeeded)
+                return BadRequest(resp);
+
+            return Created(new Uri(string.Empty), resp);
         }
 
         [HttpPost("/api/account/login")]
-        [ProducesResponseType(typeof(LoginUserCommandResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(LoginUserCommandResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<LoginUserCommandResponse>> Login([FromBody] LoginUserCommandRequest request)
         {
-            return await Mediator.Send(request);
+            var resp = await Mediator.Send(request);
+
+            if (!resp.Succeeded)
+                return BadRequest(resp);
+
+            return Ok(resp);
         }
 
         [HttpGet("/api/auth/providers")]
-        [ProducesResponseType(typeof(GetProvidersQueryResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(GetProvidersQueryResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetProvidersQueryResponse>> GetProviders()
         {
             return await Mediator.Send(new GetProvidersQueryRequest());
@@ -39,32 +55,43 @@ namespace MyMoon.Api.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("/api/account/externalLogin")]
-        [ProducesResponseType(typeof(ExternalLoginQueryResponse), (int)HttpStatusCode.OK)]
-        [EnableCors("AllowAll")]
+        [ProducesResponseType(typeof(ExternalLoginQueryResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ExternalLoginQueryResponse>> ExternalLogin(string provider, string returnUrl)
         {
-            var res = await Mediator.Send(new ExternalLoginQueryRequest()
+            var resp = await Mediator.Send(new ExternalLoginQueryRequest()
             {
                 Provider = provider,
                 ReturnUrl = returnUrl,
                 RedirectUrl = Url.Action(nameof(ExternalLoginCallback), "Users", new { returnUrl })
             });
 
-            return Challenge(res.Properties, provider);
+            if (!resp.Succeeded)
+                return BadRequest(resp);
+
+            return Challenge(resp.Properties, provider);
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         [AllowAnonymous]
+        [HttpPost]
         [HttpGet]
         [Route("/api/account/externallogincallback")]
+        [ProducesResponseType(typeof(LoginUserCommandResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null)
         {
-            var res = await Mediator.Send(new ExternalLoginCallbackQueryRequest() { ReturnUrl = returnUrl });
-            return Ok(res);
+            var resp = await Mediator.Send(new ExternalLoginCallbackCommandRequest() { ReturnUrl = returnUrl });
+
+            if (!resp.Succeeded)
+                return BadRequest(resp);
+
+            return Ok(resp);
         }
 
         [HttpGet]
-        [Route("details")]
+        [Route("/details")]
         [Authorize]
         public ActionResult Details()
         {

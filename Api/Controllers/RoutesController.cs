@@ -10,7 +10,7 @@ namespace Api.Controllers
     {
         [HttpGet]
         [Route("/api/routes")]
-        [ProducesResponseType(typeof(GetRoutesQueryResponse), (int)StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GetRoutesQueryResponse), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetRoutesQueryResponse>> Get([FromQuery] GetRoutesQueryRequest request)
         {
             return await Mediator.Send(request);

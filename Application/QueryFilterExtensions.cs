@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MyMoon.Application.Common.Models;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,7 +10,6 @@ namespace MyMoon.Application
 {
     public static class QueryFilterExtensions
     {
-
         public static IQueryable<TSource> Filter<TSource>(this IQueryable<TSource> source, string value, Expression<Func<TSource, string>> property)
         {
             if (string.IsNullOrEmpty(value)) return source;
