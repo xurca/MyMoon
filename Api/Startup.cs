@@ -72,6 +72,7 @@ namespace Api
                     opt.Scope.Add("openid");
                     opt.Scope.Add("profile");
                     opt.Scope.Add("email");
+                    opt.SaveTokens = true;
                 });
 
             services.ConfigureApplicationCookie(config =>
