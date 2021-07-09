@@ -21,4 +21,71 @@ t-> tag an image to give it a name
 
 docker run -d -p 8080:80 --name myapp aspnetapp
 
+
+docker build -t oktamvclogin .
+docker run oktamvclogin
+
 https://docs.docker.com/samples/dotnetcore/
+
+
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+WORKDIR /src
+COPY ["Api/Api.csproj", "Api/"]
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+RUN dotnet restore "Api/Api.csproj"
+COPY . .
+WORKDIR "/src/Api"
+RUN dotnet build "Api.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Api.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "MyMoon.Api.dll"]
+
+
+
+----
+
+https://developer.okta.com/blog/2019/09/18/build-a-simple-dotnet-core-app-in-docker
+
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+WORKDIR /src
+COPY ["OktaMvcLogin.csproj", "./"]
+RUN dotnet restore "./OktaMvcLogin.csproj"
+COPY . .
+RUN dotnet build "OktaMvcLogin.csproj" -c Release -o /app
+
+
+# Build an image using the Dockerfile in the current directory
+docker build --target build -t oktamvclogin .
+# Run the image, executing the command 'ls /app'
+docker run -it oktamvclogin ls /app
+
+
+FROM build AS publish
+RUN dotnet publish "OktaMvcLogin.csproj" -c Release -o /app
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS base
+WORKDIR /app
+EXPOSE 5001
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "OktaMvcLogin.dll"]
+
+
+docker build -t oktamvclogin .
+docker run oktamvclogin
