@@ -11,6 +11,7 @@ namespace MyMoon.Application.EventHandlers
     {
         public async Task HandleAsync(UserCreatedEvent @event)
         {
+            await Task.CompletedTask;
         }
     }
 }
