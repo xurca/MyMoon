@@ -13,6 +13,8 @@ namespace MyMoon.Infrastructure.Persistence
 {
     public class MyMoonDbContext : DbContext, IDbContext
     {
+        public DbSet<User> Users { get; set; }
+
         IEventDispatcher _eventDispatcher;
 
         public MyMoonDbContext(DbContextOptions<MyMoonDbContext> options, IEventDispatcher eventDispatcher) : base(options)

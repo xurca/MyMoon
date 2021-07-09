@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MyMoon.Domain.Entities;
 using MyMoon.Domain.Enums;
+using MyMoon.Domain.UserManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace MyMoon.Infrastructure.Persistence
                         if (context.Database.IsNpgsql())
                             context.Database.Migrate();
 
-                        //await SeedData(context);
+                        await SeedData(context);
                         await Task.FromResult(0);
                     }
                     catch (Exception ex)
@@ -43,7 +44,7 @@ namespace MyMoon.Infrastructure.Persistence
 
             return host;
         }
-        /*
+        
         private async static Task SeedData(MyMoonDbContext context)
         {
             if (!context.Users.Any())
@@ -67,7 +68,7 @@ namespace MyMoon.Infrastructure.Persistence
 
                     var destination = GetDestination(location);
 
-                    var user = new User(firstLastName.first, firstLastName.last, null, (Gender)random.Next(2), random.Next(20, 35), random.RandomStar());
+                    var user = new User(firstLastName.first, firstLastName.last, (Gender)random.Next(2), null, null);
 
                     context.Users.Add(user);
 
@@ -78,7 +79,7 @@ namespace MyMoon.Infrastructure.Persistence
 
                     route.WithPreference(preferences.ElementAt(random.Next(4)));
 
-                    context.Routes.Add(route);
+                    context.Set<Route>().Add(route);
                 }
 
                 await context.SaveChangesAsync();
@@ -97,7 +98,7 @@ namespace MyMoon.Infrastructure.Persistence
                 }
             }
         }
-        */
+
         #region Utils
 
         private static IEnumerable<Preference> GetPreferences()

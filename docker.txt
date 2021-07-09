@@ -1,0 +1,24 @@
+docker run -it nginx:latest /bin/bash
+i->interactive
+t->pseudo terminal to send inputs to container
+
+docker container list
+docker container list -a
+a-> shows not running containers
+
+docker pull nginx
+
+
+docker rm {container id}
+->remove container
+
+docker rmi {container name/container id}
+->remove image
+
+docker build -t mymoon/api .
+t-> tag an image to give it a name
+
+
+docker run -d -p 8080:80 --name myapp aspnetapp
+
+https://docs.docker.com/samples/dotnetcore/
