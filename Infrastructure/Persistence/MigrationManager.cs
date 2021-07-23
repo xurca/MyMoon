@@ -20,27 +20,27 @@ namespace MyMoon.Infrastructure.Persistence
     {
         public async static Task<IHost> MigrateDatabase(this IHost host)
         {
-            using (var scope = host.Services.CreateScope())
-            {
-                using (var context = scope.ServiceProvider.GetRequiredService<MyMoonDbContext>())
-                {
-                    try
-                    {
-                        context.Database.EnsureDeleted();
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    using (var context = scope.ServiceProvider.GetRequiredService<MyMoonDbContext>())
+            //    {
+            //        try
+            //        {
+            //            context.Database.EnsureDeleted();
 
-                        if (context.Database.IsNpgsql())
-                            context.Database.Migrate();
+            //            if (context.Database.IsNpgsql())
+            //                context.Database.Migrate();
 
-                        await SeedData(context);
-                        await Task.FromResult(0);
-                    }
-                    catch (Exception ex)
-                    {
-                        var logger = scope.ServiceProvider.GetRequiredService<ILogger<MyMoonDbContext>>();
-                        logger.LogError(ex, "Error while migrating data!");
-                    }
-                }
-            }
+            //            await SeedData(context);
+            //            await Task.FromResult(0);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            var logger = scope.ServiceProvider.GetRequiredService<ILogger<MyMoonDbContext>>();
+            //            logger.LogError(ex, "Error while migrating data!");
+            //        }
+            //    }
+            //}
 
             return host;
         }
